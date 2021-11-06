@@ -5,10 +5,10 @@ import "leaflet-defaulticon-compatibility";
 
 const Map = () => {
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={{height: 400, width: "100%"}}>
+    <MapContainer center={[62.47263055642655, 6.140949994893921]} zoom={13} scrollWheelZoom={false} style={{height: "100vh", width: "100%"}}>
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://www.kartverket.no/">Kartverket</a>'
+        url="http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=kartdata3&zoom={z}&x={x}&y={y}"
       />
       <Marker position={[51.505, -0.09]}>
         <Popup>

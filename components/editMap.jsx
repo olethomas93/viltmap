@@ -1,7 +1,36 @@
-import { Map, TileLayer, FeatureGroup, Circle, MapContainer,layer } from 'react-leaflet';
+import { Map, TileLayer, FeatureGroup, Circle, MapContainer,layer,useMapEvents,Marker,Popup } from 'react-leaflet';
+import{ useState } from 'react';
+import "leaflet/dist/leaflet.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import "leaflet-defaulticon-compatibility";
 import { EditControl } from "react-leaflet-draw"
 
+
+
+
 const editMap = () =>{
+
+
+  function LocationMarker() {
+    const [position, setPosition] = useState(null)
+    const map = useMapEvents({
+      click() {
+        map.locate()
+      },
+      locationfound(e) {
+        setPosition(e.latlng)
+        map.flyTo(e.latlng, map.getZoom())
+      },
+    })
+  
+    return position === null ? null : (
+      <Marker position={position}>
+        <Popup>You are here</Popup>
+      </Marker>
+    )
+  }
+
+
     const _onEdited = e => {
         let numEdited = 0;
         e.layers.eachLayer(layer => {
@@ -99,17 +128,17 @@ const editMap = () =>{
 
     
     return (
-    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={{height: 400, width: "100%"}}>
+    <MapContainer center={[62.47148106501107, 6.14661711328711]} zoom={13} style={{height: "100vh", width: "100%"}}>
          <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://www.kartverket.no/">Kartverket</a>'
+          url="http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=kartdata3&zoom={z}&x={x}&y={y}"
         />
+   
   <FeatureGroup>
     <EditControl
       position='topright'
-      edit={{edit:false}}
+      
       onDrawStart={_onDrawStart}
-      position="topleft"
       onEdited={_onEdited}
       onCreated={_onCreated}
       onDeleted={_onDeleted}
@@ -117,8 +146,10 @@ const editMap = () =>{
         rectangle: false
       }}
     />
-    <Circle center={[51.51, -0.06]} radius={200} />
+ 
   </FeatureGroup>
+
+  {/* <LocationMarker/> */}
   </MapContainer>
 
 

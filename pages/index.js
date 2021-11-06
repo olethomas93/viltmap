@@ -1,5 +1,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
+import Toolbar from '../components/toolbar'
+
 
 function HomePage() {
   const Map = React.useMemo(() => dynamic(
@@ -10,23 +12,27 @@ function HomePage() {
     }
   ), [/* list variables which should trigger a re-render here */])
 
-  const EditMap = React.useMemo(()=>dynamic(()=> import('../components/editMap'),
+//   const EditMap = React.useMemo(()=>dynamic(()=> import('../components/editMap'),
   
-  {
+//   {
 
-loading:()=> <p>A map is loading</p>,
-ssr:false
-  }
-  ) )
+// loading:()=> <p>A map is loading</p>,
+// ssr:false
+//   }
+//   ) )
+
+  const Toolbar = dynamic(()=> import('../components/toolbar'))
   return( 
   
-  <div>
+  <div >
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
   
- <Map />
 
- <EditMap></EditMap>
+<Toolbar/>
 
+<div style={{height:"50%"}}>
+ <Map/>
+ </div>
   </div>)
  
 }
