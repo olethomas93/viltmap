@@ -1,7 +1,9 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import Toolbar from '../components/toolbar'
-
+// import Amplify from "aws-amplify";
+// import awsExports from "./aws-exports";
+// Amplify.configure(awsExports);
 
 function HomePage() {
   const Map = React.useMemo(() => dynamic(
@@ -13,7 +15,7 @@ function HomePage() {
   ), [/* list variables which should trigger a re-render here */])
 
 //   const EditMap = React.useMemo(()=>dynamic(()=> import('../components/editMap'),
-  
+   
 //   {
 
 // loading:()=> <p>A map is loading</p>,
